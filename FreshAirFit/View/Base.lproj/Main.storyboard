@@ -49,12 +49,76 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Activities" id="i3c-jN-QN3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ddZ-9f-x5T"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ddZ-9f-x5T">
+                            <connections>
+                                <segue destination="sC6-LN-PIk" kind="show" id="GPX-QY-2aN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLR-vc-xlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="24.7376311844078"/>
+            <point key="canvasLocation" x="956" y="25"/>
+        </scene>
+        <!--Activity Details-->
+        <scene sceneID="FeC-gD-smz">
+            <objects>
+                <tableViewController title="Activity Details" id="sC6-LN-PIk" customClass="ActivityDetailsViewController" customModule="FreshAirFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JhL-Ee-Xc1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="CZ6-5p-Ilk">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gCh-oi-NLJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gCh-oi-NLJ" id="BJe-wg-Aoh">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eco-Gv-PwT">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eco-Gv-PwT" id="NLb-SI-Vh1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qaq-4D-r0N">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qaq-4D-r0N" id="SCr-5z-EWj">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="sC6-LN-PIk" id="BAw-YL-kr1"/>
+                            <outlet property="delegate" destination="sC6-LN-PIk" id="90s-cq-ZM8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Activity Details" id="KPD-qG-9TL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="avu-Ka-F5X">
+                            <connections>
+                                <action selector="cancel" destination="sC6-LN-PIk" id="ddu-Kl-xcD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="2Yc-rN-AG4">
+                            <connections>
+                                <action selector="done" destination="sC6-LN-PIk" id="ipj-rK-EEI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kxB-Hk-sME" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1670" y="25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qDA-Qu-txg">
