@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4OH-4s-IuG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pkf-8E-piD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Activities View Controller-->
+        <!--Activities-->
         <scene sceneID="vkE-IM-SkE">
             <objects>
-                <tableViewController id="4OH-4s-IuG" customClass="ActivitiesViewController" customModule="FreshAirFit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Activities" id="4OH-4s-IuG" customClass="ActivitiesViewController" customModule="FreshAirFit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="R5d-Ou-6la">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" id="Hpd-X6-dfw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Hpd-X6-dfw" customClass="ActivityTableViewCell" customModule="FreshAirFit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hpd-X6-dfw" id="YwS-Lv-ws2">
@@ -37,6 +37,11 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="activityNameLabel" destination="ERy-0h-GXU" id="tNb-NA-LSK"/>
+                                    <outlet property="weatherIcon" destination="ghb-kx-nSE" id="P2x-ZM-RfP"/>
+                                    <outlet property="weatherIconImageView" destination="ghb-kx-nSE" id="d5E-Fd-X4v"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -44,6 +49,9 @@
                             <outlet property="delegate" destination="4OH-4s-IuG" id="RFy-WZ-7Gh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Activities" id="i3c-jN-QN3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ddZ-9f-x5T"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityNameLabel" destination="ERy-0h-GXU" id="8wj-ND-Egj"/>
                         <outlet property="weatherIcon" destination="ghb-kx-nSE" id="xDF-HS-YzV"/>
@@ -51,7 +59,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLR-vc-xlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="25"/>
+            <point key="canvasLocation" x="1212" y="24.7376311844078"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qDA-Qu-txg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pkf-8E-piD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Iqw-K2-AEQ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4OH-4s-IuG" kind="relationship" relationship="rootViewController" id="zbX-Rl-kXt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Psg-g8-ywf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="272.80000000000001" y="24.7376311844078"/>
         </scene>
     </scenes>
 </document>
