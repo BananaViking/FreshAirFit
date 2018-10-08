@@ -11,13 +11,15 @@ import UIKit
 class Activity {
     var description: String
     var weatherIcon: String
-    var lowTemp: Int
-    var highTemp: Int
+    var lowTemp: String
+    var highTemp: String
+    var shouldRemind: Bool
     
-    init(description: String, weatherIcon: String, lowTemp: Int, highTemp: Int) {
-        self.description = description
-        self.weatherIcon = weatherIcon
-        self.lowTemp = lowTemp
-        self.highTemp = highTemp
+    init() {
+        self.description = "Add a description for your activity..."
+        self.weatherIcon = "defaultImage"
+        self.lowTemp = "..."
+        self.highTemp = "..."
+        self.shouldRemind = false
     }
 }

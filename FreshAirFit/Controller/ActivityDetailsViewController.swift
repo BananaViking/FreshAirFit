@@ -9,22 +9,22 @@
 import UIKit
 
 class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
-    var descriptionText = "Add a description here..."
-    var lowTemp = 0
-    var highTemp = 0
+    var activity = Activity()
     var weatherConditions = [String]()
     var observer: Any!
-    var activityToEdit: Activity? {
-        didSet {
-            if let activity = activityToEdit {
-                descriptionText = activity.description
-                lowTemp = activity.lowTemp
-                highTemp = activity.highTemp
-            }
-        }
-    }
+//    var activityToEdit: Activity? {
+//        didSet {
+//            if let activity = activityToEdit {
+//                descriptionText = activity.description
+//                lowTemp = activity.lowTemp
+//                highTemp = activity.highTemp
+//            }
+//        }
+//    }
     
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var lowTempValue: UITextField!
+    @IBOutlet weak var highTempValue: UITextField!
     
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
@@ -42,19 +42,19 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextView.delegate = self
-        descriptionTextView.text = descriptionText
+        descriptionTextView.text = activity.description
         descriptionTextView.textColor = UIColor.lightGray
         
-        if let activity = activityToEdit {
-            title = "Edit Activity"
-            if activity.description.isEmpty {
-                descriptionTextView.textColor = UIColor.lightGray
-                descriptionTextView.text = "Add a description here..."
-            } else {
-                descriptionTextView.textColor = UIColor.black
-                descriptionTextView.text = activity.description
-            }
-        }
+//        if let activity = activityToEdit {
+//            title = "Edit Activity"
+//            if activity.description.isEmpty {
+//                descriptionTextView.textColor = UIColor.lightGray
+//                descriptionTextView.text = "Add a description here..."
+//            } else {
+//                descriptionTextView.textColor = UIColor.black
+//                descriptionTextView.text = activity.description
+//            }
+//        }
         
         listenForBackgroundNotification()
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
