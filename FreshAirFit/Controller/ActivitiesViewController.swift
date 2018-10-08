@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherIconImageView: UIImageView!
-    @IBOutlet weak var activityNameLabel: UILabel!
+    @IBOutlet weak var activityDescriptionLabel: UILabel!
 }
 
 class ActivitiesViewController: UITableViewController {
@@ -28,7 +28,7 @@ class ActivitiesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
-        cell.activityNameLabel?.text = activities[indexPath.row].name
+        cell.activityDescriptionLabel?.text = activities[indexPath.row].description
         cell.weatherIconImageView?.image = UIImage(named: activities[indexPath.row].weatherIcon)
         return cell
     }

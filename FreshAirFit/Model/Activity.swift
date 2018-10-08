@@ -9,12 +9,15 @@
 import UIKit
 
 class Activity {
-    var name: String
+    var description: String
     var weatherIcon: String
+    var lowTemp: Int
+    var highTemp: Int
     
-    init(name: String, weatherIcon: String) {
-        self.name = name
+    init(description: String, weatherIcon: String, lowTemp: Int, highTemp: Int) {
+        self.description = description
         self.weatherIcon = weatherIcon
+        self.lowTemp = lowTemp
+        self.highTemp = highTemp
     }
-    
 }
