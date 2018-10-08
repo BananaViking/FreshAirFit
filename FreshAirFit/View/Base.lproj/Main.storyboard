@@ -38,9 +38,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="activityNameLabel" destination="ERy-0h-GXU" id="tNb-NA-LSK"/>
-                                    <outlet property="weatherIcon" destination="ghb-kx-nSE" id="P2x-ZM-RfP"/>
-                                    <outlet property="weatherIconImageView" destination="ghb-kx-nSE" id="d5E-Fd-X4v"/>
+                                    <outlet property="activityNameLabel" destination="ERy-0h-GXU" id="azZ-o4-Aw3"/>
+                                    <outlet property="weatherIconImageView" destination="ghb-kx-nSE" id="5kp-WC-0qd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -52,10 +51,6 @@
                     <navigationItem key="navigationItem" title="Activities" id="i3c-jN-QN3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ddZ-9f-x5T"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="activityNameLabel" destination="ERy-0h-GXU" id="8wj-ND-Egj"/>
-                        <outlet property="weatherIcon" destination="ghb-kx-nSE" id="xDF-HS-YzV"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLR-vc-xlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
