@@ -27,7 +27,12 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBAction func done() {
-        
+        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        hudView.text = "Added"
+        afterDelay(0.6) {
+            hudView.hide()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func cancel() {
@@ -46,7 +51,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
                 descriptionTextView.textColor = UIColor.lightGray
                 descriptionTextView.text = "Add a description here..."
             } else {
-                descriptionTextView.textColor = UIColor.white
+                descriptionTextView.textColor = UIColor.black
                 descriptionTextView.text = activity.description
             }
         }
@@ -69,7 +74,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         
         if descriptionTextView.textColor == UIColor.lightGray {
             descriptionTextView.text = nil
-            descriptionTextView.textColor = UIColor.white
+            descriptionTextView.textColor = UIColor.black
         }
     }
     
@@ -103,5 +108,9 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
             return
         }
         descriptionTextView.resignFirstResponder()
+    }
+    
+    func afterDelay(_ seconds: Double, run: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: run)
     }
 }
