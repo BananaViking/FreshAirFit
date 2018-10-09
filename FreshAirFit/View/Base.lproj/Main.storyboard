@@ -175,9 +175,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UH3-dn-A0G">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UH3-dn-A0G">
                                                     <rect key="frame" x="257" y="6" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="shouldRemindToggled:" destination="sC6-LN-PIk" eventType="valueChanged" id="yfz-Rg-kCW"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -223,6 +226,7 @@
                         <outlet property="descriptionTextView" destination="Ba4-s0-7gG" id="G3W-VQ-ol1"/>
                         <outlet property="highTempValue" destination="UV5-j0-Vfk" id="Mxt-1k-O4B"/>
                         <outlet property="lowTempValue" destination="dzN-2u-aus" id="dNY-jp-jq6"/>
+                        <outlet property="shouldRemindSwitch" destination="UH3-dn-A0G" id="Ybj-82-49V"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxB-Hk-sME" userLabel="First Responder" sceneMemberID="firstResponder"/>

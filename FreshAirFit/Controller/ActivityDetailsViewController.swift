@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     var activity = Activity()
@@ -25,6 +26,19 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var lowTempValue: UITextField!
     @IBOutlet weak var highTempValue: UITextField!
+    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    
+    @IBAction func shouldRemindToggled(_ switchControl: UISwitch) {
+        descriptionTextView.resignFirstResponder()
+        
+        if switchControl.isOn {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]) {
+                granted, error in
+                //do nothing
+            }
+        }
+    }
     
     @IBAction func done() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
@@ -43,9 +57,11 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         super.viewDidLoad()
         descriptionTextView.delegate = self
         descriptionTextView.text = activity.description
+        descriptionTextView.textColor = UIColor.lightGray
         lowTempValue.text = activity.lowTemp
         highTempValue.text = activity.highTemp
-        descriptionTextView.textColor = UIColor.lightGray
+        shouldRemindSwitch.isOn = activity.shouldRemind
+        
         
 //        if let activity = activityToEdit {
 //            title = "Edit Activity"
