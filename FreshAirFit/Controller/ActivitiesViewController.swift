@@ -18,6 +18,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
     }
 
     //MARK: - TableView Delegate Functions

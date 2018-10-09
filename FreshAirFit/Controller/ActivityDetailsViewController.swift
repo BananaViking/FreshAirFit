@@ -89,6 +89,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
         shouldNotifySwitch.isOn = activity.shouldNotify
         
         if let activityToEdit = activityToEdit {
