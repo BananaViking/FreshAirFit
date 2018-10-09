@@ -28,6 +28,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
+        cell.conditionsLabel?.text = "Temp. range: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
         return cell
     }
     

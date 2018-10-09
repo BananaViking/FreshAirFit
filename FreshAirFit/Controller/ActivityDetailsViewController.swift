@@ -64,6 +64,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
         let activity = Activity()
         activity.activityDescription = descriptionTextField.text!
+        activity.lowTemp = lowTempTextField.text!
+        activity.highTemp = highTempTextField.text!
         delegate?.activityDetailsViewController(self, didFinishAdding: activity)
     }
     
