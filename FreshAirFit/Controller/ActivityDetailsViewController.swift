@@ -11,7 +11,6 @@ import UserNotifications
 
 class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     var activity = Activity()
-    var weatherConditions = [String]()
     var observer: Any!
 //    var activityToEdit: Activity? {
 //        didSet {
