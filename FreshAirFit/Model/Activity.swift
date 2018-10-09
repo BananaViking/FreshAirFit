@@ -9,6 +9,7 @@
 import UserNotifications
 
 class Activity: NSObject, Codable {
+    var activityDescription = ""
     var lowTemp = ""
     var highTemp = ""
     var shouldNotify = false

@@ -32,7 +32,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
     @IBOutlet weak var notificationTimeLabel: UILabel!
     
-    @IBAction func remindTimeChanged(_ datePicker: UIDatePicker) {
+    @IBAction func notificationTimeChanged(_ datePicker: UIDatePicker) {
         notifyTime = datePicker.date
         updateNotificationTimeLabel()
     }
@@ -65,28 +65,29 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextView.delegate = self
-        descriptionTextView.text = activity.description
+        
+        descriptionTextView.text = "Add a description here..."
         descriptionTextView.textColor = UIColor.lightGray
         lowTempValue.text = activity.lowTemp
         highTempValue.text = activity.highTemp
         shouldNotifySwitch.isOn = activity.shouldNotify
         
         
-//        if let activity = activityToEdit {
-//            title = "Edit Activity"
-//            if activity.description.isEmpty {
-//                descriptionTextView.textColor = UIColor.lightGray
-//                descriptionTextView.text = "Add a description here..."
-//            } else {
-//                descriptionTextView.textColor = UIColor.black
-//                descriptionTextView.text = activity.description
-//            }
-//        }
+        if let activityToEdit = activityToEdit {
+            title = "Edit Activity"
+            descriptionTextView.text = activityToEdit.activityDescription
+            descriptionTextView.textColor = UIColor.black
+        }
         
         listenForBackgroundNotification()
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        descriptionTextView.becomeFirstResponder()
     }
     
     //MARK: - TableView Delegate Functions
@@ -156,4 +157,17 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     func hideDatePicker() {  // HQ DailyDetailVC
         
     }
+    
+    //MARK: - Navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "addActivity" {
+//            
+//        } else if segue.identifier == "editActivity" {
+//            let controller = segue.destination as! ActivityDetailsViewController
+//            controller.delegate = self
+//            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+//                controller.activityToEdit = activities[indexPath.row]
+//            }
+//        }
+//    }
 }
