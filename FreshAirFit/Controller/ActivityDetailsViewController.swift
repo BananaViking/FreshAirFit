@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
+class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate {
     var activity = Activity()
     var activityToEdit: Activity?
     var notifyTime = Date()
@@ -26,7 +26,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
 //        }
 //    }
     
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var lowTempValue: UITextField!
     @IBOutlet weak var highTempValue: UITextField!
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
@@ -38,7 +38,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     }
     
     @IBAction func shouldNotifyToggled(_ switchControl: UISwitch) {
-        descriptionTextView.resignFirstResponder()
+        descriptionTextField.resignFirstResponder()
         
         if switchControl.isOn {
             let center = UNUserNotificationCenter.current()
@@ -49,7 +49,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func done() {
+    @IBAction func doneBarButtonPressed() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         hudView.text = "Added"
         afterDelay(0.6) {
@@ -58,16 +58,18 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func cancel() {
+    @IBAction func cancelBarButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func doneKeyboardButtonPressed(_ sender: UITextField) {
+        resignFirstResponder()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        descriptionTextView.delegate = self
         
-        descriptionTextView.text = "Add a description here..."
-        descriptionTextView.textColor = UIColor.lightGray
         lowTempValue.text = activity.lowTemp
         highTempValue.text = activity.highTemp
         shouldNotifySwitch.isOn = activity.shouldNotify
@@ -75,8 +77,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         
         if let activityToEdit = activityToEdit {
             title = "Edit Activity"
-            descriptionTextView.text = activityToEdit.activityDescription
-            descriptionTextView.textColor = UIColor.black
+            descriptionTextField.text = activityToEdit.activityDescription
         }
         
         listenForBackgroundNotification()
@@ -87,42 +88,20 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        descriptionTextView.becomeFirstResponder()
+        descriptionTextField.becomeFirstResponder()
     }
     
     //MARK: - TableView Delegate Functions
     
-    //MARK: - TextView Delegate Functions
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        // Dispatch block puts cursor placement code on next run cycle so doesn't get called at same time as the rest of function
-        DispatchQueue.main.async {
-            let newPosition = self.descriptionTextView.endOfDocument
-            self.descriptionTextView.selectedTextRange = self.descriptionTextView.textRange(from: newPosition, to: newPosition)
-        }
-        
-        if descriptionTextView.textColor == UIColor.lightGray {
-            descriptionTextView.text = nil
-            descriptionTextView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if descriptionTextView.text.isEmpty {
-            descriptionTextView.text = "Add a description here..."
-            descriptionTextView.textColor = UIColor.lightGray
-        }
-    }
     
     //MARK: - Other Functions
-    
-    
     func listenForBackgroundNotification() {
         observer = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             if let weakSelf = self {
                 if weakSelf.presentedViewController != nil {
                     weakSelf.dismiss(animated: false, completion: nil)
                 }
-                weakSelf.descriptionTextView.resignFirstResponder()
+                weakSelf.descriptionTextField.resignFirstResponder()
             }
         }
     }
@@ -137,7 +116,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
             return
         }
-        descriptionTextView.resignFirstResponder()
+        descriptionTextField.resignFirstResponder()
     }
     
     func afterDelay(_ seconds: Double, run: @escaping () -> Void) {

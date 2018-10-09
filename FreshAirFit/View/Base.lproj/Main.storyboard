@@ -67,20 +67,23 @@
                         <sections>
                             <tableViewSection headerTitle="Description" id="CZ6-5p-Ilk">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gCh-oi-NLJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="gCh-oi-NLJ">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gCh-oi-NLJ" id="BJe-wg-Aoh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Add description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ba4-s0-7gG">
-                                                    <rect key="frame" x="10" y="0.0" width="294" height="40"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add activity description here..." textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K2S-3E-1ut">
+                                                    <rect key="frame" x="16" y="7" width="288" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                                </textView>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="doneKeyboardButtonPressed:" destination="sC6-LN-PIk" eventType="editingDidEndOnExit" id="w5w-3x-QTD"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -199,17 +202,17 @@
                     <navigationItem key="navigationItem" title="Add Activity" id="KPD-qG-9TL">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="avu-Ka-F5X">
                             <connections>
-                                <action selector="cancel" destination="sC6-LN-PIk" id="ddu-Kl-xcD"/>
+                                <action selector="cancelBarButtonPressed" destination="sC6-LN-PIk" id="ddu-Kl-xcD"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="2Yc-rN-AG4">
                             <connections>
-                                <action selector="done" destination="sC6-LN-PIk" id="ipj-rK-EEI"/>
+                                <action selector="doneBarButtonPressed" destination="sC6-LN-PIk" id="ipj-rK-EEI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="descriptionTextView" destination="Ba4-s0-7gG" id="G3W-VQ-ol1"/>
+                        <outlet property="descriptionTextField" destination="K2S-3E-1ut" id="lbm-IA-uaT"/>
                         <outlet property="highTempValue" destination="UV5-j0-Vfk" id="Mxt-1k-O4B"/>
                         <outlet property="lowTempValue" destination="dzN-2u-aus" id="dNY-jp-jq6"/>
                         <outlet property="notificationTimeLabel" destination="6Lv-tw-6EX" id="myl-Zd-gd9"/>
