@@ -10,28 +10,14 @@ import UIKit
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityDescriptionLabel: UILabel!
+    @IBOutlet weak var conditionsLabel: UILabel!
 }
 
 class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate {
     var activities = [Activity]()
-    var sampleActivity = Activity()
-    
-    @IBAction func addActivity() {
-        let newRowIndex = activities.count
-        let otherActivity = Activity()
-        otherActivity.activityDescription = "Swimming"
-        activities.append(otherActivity)
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activities.append(sampleActivity)
-        sampleActivity.activityDescription = "Hiking"
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     //MARK: - TableView Delegate Functions
@@ -57,6 +43,12 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     }
     
     func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishAdding activity: Activity) {
+        let newRowIndex = activities.count
+        activities.append(activity)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
         navigationController?.popViewController(animated: true)
     }
     

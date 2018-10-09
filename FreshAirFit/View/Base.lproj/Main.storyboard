@@ -25,16 +25,24 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERy-0h-GXU" userLabel="Activity Name">
-                                            <rect key="frame" x="16" y="11" width="288" height="21"/>
+                                            <rect key="frame" x="16" y="0.0" width="270" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFC-dS-2Lk">
+                                            <rect key="frame" x="16" y="22" width="270" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="activityDescriptionLabel" destination="ERy-0h-GXU" id="azZ-o4-Aw3"/>
+                                    <outlet property="conditionsLabel" destination="nFC-dS-2Lk" id="2ve-cg-leX"/>
                                     <segue destination="sC6-LN-PIk" kind="show" identifier="editActivity" id="wbh-an-YAR"/>
                                 </connections>
                             </tableViewCell>
@@ -78,7 +86,7 @@
                                                     <rect key="frame" x="16" y="7" width="288" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="doneKeyboardButtonPressed:" destination="sC6-LN-PIk" eventType="editingDidEndOnExit" id="w5w-3x-QTD"/>
@@ -215,8 +223,8 @@
                     <connections>
                         <outlet property="descriptionTextField" destination="K2S-3E-1ut" id="lbm-IA-uaT"/>
                         <outlet property="doneBarButton" destination="2Yc-rN-AG4" id="bEo-dY-E6n"/>
-                        <outlet property="highTempValue" destination="UV5-j0-Vfk" id="Mxt-1k-O4B"/>
-                        <outlet property="lowTempValue" destination="dzN-2u-aus" id="dNY-jp-jq6"/>
+                        <outlet property="highTempTextField" destination="UV5-j0-Vfk" id="Mxt-1k-O4B"/>
+                        <outlet property="lowTempTextField" destination="dzN-2u-aus" id="dNY-jp-jq6"/>
                         <outlet property="notificationTimeLabel" destination="6Lv-tw-6EX" id="myl-Zd-gd9"/>
                         <outlet property="shouldNotifySwitch" destination="UH3-dn-A0G" id="Ybj-82-49V"/>
                     </connections>

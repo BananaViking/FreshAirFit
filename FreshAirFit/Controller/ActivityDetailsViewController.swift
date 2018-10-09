@@ -33,8 +33,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
 //    }
     
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var lowTempValue: UITextField!
-    @IBOutlet weak var highTempValue: UITextField!
+    @IBOutlet weak var lowTempTextField: UITextField!
+    @IBOutlet weak var highTempTextField: UITextField!
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
     @IBOutlet weak var notificationTimeLabel: UILabel!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
@@ -78,15 +78,13 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        lowTempValue.text = activity.lowTemp
-        highTempValue.text = activity.highTemp
         shouldNotifySwitch.isOn = activity.shouldNotify
-        
         
         if let activityToEdit = activityToEdit {
             title = "Edit Activity"
             descriptionTextField.text = activityToEdit.activityDescription
+            lowTempTextField.text = activityToEdit.lowTemp
+            highTempTextField.text = activityToEdit.highTemp
         }
         
         listenForBackgroundNotification()
