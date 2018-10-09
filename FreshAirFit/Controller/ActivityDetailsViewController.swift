@@ -11,7 +11,11 @@ import UserNotifications
 
 class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     var activity = Activity()
+    var activityToEdit: Activity?
+    var notifyTime = Date()
+    var datePickerVisible = false
     var observer: Any!
+    
 //    var activityToEdit: Activity? {
 //        didSet {
 //            if let activity = activityToEdit {
@@ -26,6 +30,12 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var lowTempValue: UITextField!
     @IBOutlet weak var highTempValue: UITextField!
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
+    @IBOutlet weak var notificationTimeLabel: UILabel!
+    
+    @IBAction func remindTimeChanged(_ datePicker: UIDatePicker) {
+        notifyTime = datePicker.date
+        updateNotificationTimeLabel()
+    }
     
     @IBAction func shouldNotifyToggled(_ switchControl: UISwitch) {
         descriptionTextView.resignFirstResponder()
@@ -103,6 +113,8 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     }
     
     //MARK: - Other Functions
+    
+    
     func listenForBackgroundNotification() {
         observer = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             if let weakSelf = self {
@@ -129,5 +141,19 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     
     func afterDelay(_ seconds: Double, run: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: run)
+    }
+    
+    func updateNotificationTimeLabel() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        notificationTimeLabel.text = formatter.string(from: notifyTime)
+    }
+    
+    func showDatePicker() {  // HQ DailyDetailVC
+        
+    }
+    
+    func hideDatePicker() {  // HQ DailyDetailVC
+        
     }
 }

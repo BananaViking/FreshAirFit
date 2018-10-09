@@ -177,6 +177,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lv-tw-6EX">
+                                                    <rect key="frame" x="219" y="12" width="85" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -204,6 +211,7 @@
                         <outlet property="descriptionTextView" destination="Ba4-s0-7gG" id="G3W-VQ-ol1"/>
                         <outlet property="highTempValue" destination="UV5-j0-Vfk" id="Mxt-1k-O4B"/>
                         <outlet property="lowTempValue" destination="dzN-2u-aus" id="dNY-jp-jq6"/>
+                        <outlet property="notificationTimeLabel" destination="6Lv-tw-6EX" id="myl-Zd-gd9"/>
                         <outlet property="shouldNotifySwitch" destination="UH3-dn-A0G" id="Ybj-82-49V"/>
                     </connections>
                 </tableViewController>
