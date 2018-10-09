@@ -18,8 +18,8 @@ class Activity {
     init() {
         self.description = "Add a description for your activity..."
         self.weatherIcon = "defaultImage"
-        self.lowTemp = "..."
-        self.highTemp = "..."
+        self.lowTemp = ""
+        self.highTemp = ""
         self.shouldRemind = false
     }
 }

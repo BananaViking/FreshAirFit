@@ -43,6 +43,8 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         super.viewDidLoad()
         descriptionTextView.delegate = self
         descriptionTextView.text = activity.description
+        lowTempValue.text = activity.lowTemp
+        highTempValue.text = activity.highTemp
         descriptionTextView.textColor = UIColor.lightGray
         
 //        if let activity = activityToEdit {
