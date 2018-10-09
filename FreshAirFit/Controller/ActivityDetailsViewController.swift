@@ -9,12 +9,18 @@
 import UIKit
 import UserNotifications
 
+protocol ActivityDetailsViewControllerDelegate: class {
+    func activityDetailsViewControllerDidCancel(_ controller: ActivityDetailsViewController)
+    func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishAdding activity: Activity)
+}
+
 class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate {
     var activity = Activity()
     var activityToEdit: Activity?
     var notifyTime = Date()
     var datePickerVisible = false
     var observer: Any!
+    weak var delegate: ActivityDetailsViewControllerDelegate?
     
 //    var activityToEdit: Activity? {
 //        didSet {
@@ -31,6 +37,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var highTempValue: UITextField!
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
     @IBOutlet weak var notificationTimeLabel: UILabel!
+    @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
     @IBAction func notificationTimeChanged(_ datePicker: UIDatePicker) {
         notifyTime = datePicker.date
@@ -54,12 +61,14 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         hudView.text = "Added"
         afterDelay(0.6) {
             hudView.hide()
-            self.navigationController?.popViewController(animated: true)
         }
+        let activity = Activity()
+        activity.activityDescription = descriptionTextField.text!
+        delegate?.activityDetailsViewController(self, didFinishAdding: activity)
     }
     
     @IBAction func cancelBarButtonPressed() {
-        navigationController?.popViewController(animated: true)
+        delegate?.activityDetailsViewControllerDidCancel(self)
     }
     
     @IBAction func doneKeyboardButtonPressed(_ sender: UITextField) {
@@ -84,11 +93,6 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        descriptionTextField.becomeFirstResponder()
     }
     
     //MARK: - TableView Delegate Functions
@@ -137,16 +141,12 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         
     }
     
-    //MARK: - Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "addActivity" {
-//            
-//        } else if segue.identifier == "editActivity" {
-//            let controller = segue.destination as! ActivityDetailsViewController
-//            controller.delegate = self
-//            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-//                controller.activityToEdit = activities[indexPath.row]
-//            }
-//        }
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldText = textField.text!
+        let stringRange = Range(range, in: oldText)!
+        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+        
+        doneBarButton.isEnabled = !newText.isEmpty
+        return true
+    }
 }

@@ -12,7 +12,7 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityDescriptionLabel: UILabel!
 }
 
-class ActivitiesViewController: UITableViewController {
+class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate {
     var activities = [Activity]()
     var sampleActivity = Activity()
     
@@ -51,7 +51,29 @@ class ActivitiesViewController: UITableViewController {
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
+    //MARK: - ActivityDetailsViewControllerDelegate Functions
+    func activityDetailsViewControllerDidCancel(_ controller: ActivityDetailsViewController) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishAdding activity: Activity) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Other Functions
     
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addActivity" {
+            let controller = segue.destination as! ActivityDetailsViewController
+            controller.delegate = self
+        } else if segue.identifier == "editActivity" {
+            let controller = segue.destination as! ActivityDetailsViewController
+            controller.delegate = self
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.activityToEdit = activities[indexPath.row]
+            }
+        }
+    }
 }
 
