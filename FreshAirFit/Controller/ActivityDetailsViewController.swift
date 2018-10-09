@@ -25,9 +25,9 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var lowTempValue: UITextField!
     @IBOutlet weak var highTempValue: UITextField!
-    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    @IBOutlet weak var shouldNotifySwitch: UISwitch!
     
-    @IBAction func shouldRemindToggled(_ switchControl: UISwitch) {
+    @IBAction func shouldNotifyToggled(_ switchControl: UISwitch) {
         descriptionTextView.resignFirstResponder()
         
         if switchControl.isOn {
@@ -59,7 +59,7 @@ class ActivityDetailsViewController: UITableViewController, UITextViewDelegate {
         descriptionTextView.textColor = UIColor.lightGray
         lowTempValue.text = activity.lowTemp
         highTempValue.text = activity.highTemp
-        shouldRemindSwitch.isOn = activity.shouldRemind
+        shouldNotifySwitch.isOn = activity.shouldNotify
         
         
 //        if let activity = activityToEdit {

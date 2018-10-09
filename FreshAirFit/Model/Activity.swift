@@ -6,18 +6,25 @@
 //  Copyright © 2018 Banana Viking. All rights reserved.
 //
 
-import UIKit
+import UserNotifications
 
 class Activity {
-    var description: String
-    var lowTemp: String
-    var highTemp: String
-    var shouldRemind: Bool
+    var description = "Add a description for your activity..."
+    var lowTemp = ""
+    var highTemp = ""
+    var shouldNotify = false
+    var notifyTime = Date()
+    var notifyText = ""
     
-    init() {
-        self.description = "Add a description for your activity..."
-        self.lowTemp = ""
-        self.highTemp = ""
-        self.shouldRemind = false
+    func scheduleNotification() {  // HQ Daily.swift
+        removeNotification()
+        if shouldNotify {
+            let content = UNMutableNotificationContent()
+            content.title = "Just thought you'd like to know..."
+        }
+    }
+    
+    func removeNotification() {  // HQ Daily.swift
+        
     }
 }
