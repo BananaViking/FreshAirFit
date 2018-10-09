@@ -53,6 +53,17 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         navigationController?.popViewController(animated: true)
     }
     
+    func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishEditing activity: Activity) {
+        if let index = activities.index(of: activity) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) as? ActivityTableViewCell {
+                cell.activityDescriptionLabel.text = activity.activityDescription
+                cell.conditionsLabel.text = "Temp. range: \(activity.lowTemp)° - \(activity.highTemp)°"
+            }
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Other Functions
     
     //MARK: - Navigation

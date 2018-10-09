@@ -12,6 +12,7 @@ import UserNotifications
 protocol ActivityDetailsViewControllerDelegate: class {
     func activityDetailsViewControllerDidCancel(_ controller: ActivityDetailsViewController)
     func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishAdding activity: Activity)
+    func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishEditing activity: Activity)
 }
 
 class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate {
@@ -58,15 +59,23 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     
     @IBAction func doneBarButtonPressed() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
-        hudView.text = "Added"
+        if let activityToEdit = activityToEdit {
+            hudView.text = "Updated"
+            activityToEdit.activityDescription = descriptionTextField.text!
+            activityToEdit.lowTemp = lowTempTextField.text!
+            activityToEdit.highTemp = highTempTextField.text!
+            delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
+        } else {
+            hudView.text = "Added"
+            let activity = Activity()
+            activity.activityDescription = descriptionTextField.text!
+            activity.lowTemp = lowTempTextField.text!
+            activity.highTemp = highTempTextField.text!
+            delegate?.activityDetailsViewController(self, didFinishAdding: activity)
+        }
         afterDelay(0.6) {
             hudView.hide()
         }
-        let activity = Activity()
-        activity.activityDescription = descriptionTextField.text!
-        activity.lowTemp = lowTempTextField.text!
-        activity.highTemp = highTempTextField.text!
-        delegate?.activityDetailsViewController(self, didFinishAdding: activity)
     }
     
     @IBAction func cancelBarButtonPressed() {
@@ -84,6 +93,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         
         if let activityToEdit = activityToEdit {
             title = "Edit Activity"
+            doneBarButton.isEnabled = true
             descriptionTextField.text = activityToEdit.activityDescription
             lowTempTextField.text = activityToEdit.lowTemp
             highTempTextField.text = activityToEdit.highTemp
