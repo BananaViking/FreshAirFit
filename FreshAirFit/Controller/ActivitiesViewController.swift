@@ -19,6 +19,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
+        loadActivities()
     }
 
     //MARK: - TableView Delegate Functions
@@ -37,6 +38,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         activities.remove(at: indexPath.row)
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
+        saveActivities()
     }
     
     //MARK: - ActivityDetailsViewControllerDelegate Functions
@@ -52,6 +54,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
         navigationController?.popViewController(animated: true)
+        saveActivities()
     }
     
     func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishEditing activity: Activity) {
@@ -63,9 +66,42 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             }
         }
         navigationController?.popViewController(animated: true)
+        saveActivities()
     }
     
     //MARK: - Other Functions
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        
+        return paths[0]
+    }
+    
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("Activities.plist")
+    }
+    
+    func saveActivities() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(activities)
+            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+        } catch {
+            print("Error encoding Activities.")
+        }
+    }
+    
+    func loadActivities() {
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) {
+            let decoder = PropertyListDecoder()
+            do {
+                activities = try decoder.decode([Activity].self, from: data)
+            } catch {
+                print("Error decoding Activities.")
+            }
+        }
+    }
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
