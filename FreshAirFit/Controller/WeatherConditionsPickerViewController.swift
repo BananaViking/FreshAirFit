@@ -33,6 +33,13 @@ class WeatherConditionsPickerViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.accessoryType == .none {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

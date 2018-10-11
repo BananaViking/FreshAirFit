@@ -121,7 +121,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     
     //MARK: - TableView Delegate Functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 && datePickerVisible {
+        if section == 1 && datePickerVisible {
             return 3
         } else {
             return super.tableView(tableView, numberOfRowsInSection: section)
@@ -129,7 +129,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 2 && indexPath.row == 2 {
+        if indexPath.section == 1 && indexPath.row == 2 {
             return datePickerCell
         } else {
             return super.tableView(tableView, cellForRowAt: indexPath)
@@ -137,7 +137,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 && indexPath.row == 2 {
+        if indexPath.section == 1 && indexPath.row == 2 {
             return 163
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -145,7 +145,9 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if indexPath.section == 1 && indexPath.row == 1 {
+            return indexPath
+        } else if indexPath.section == 2 && indexPath.row == 2 {
             return indexPath
         } else {
             return nil
@@ -156,7 +158,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         tableView.deselectRow(at: indexPath, animated: true)
         descriptionTextField.resignFirstResponder()
         
-        if indexPath.section == 2 && indexPath.row == 1 {
+        if indexPath.section == 1 && indexPath.row == 1 {
             if !datePickerVisible {
                 showDatePicker()
             } else {
@@ -169,7 +171,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     // data source doesn't know about the datePicker cell so trick it into thinking there are 3 rows when picker visible
     override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         var newIndexPath = indexPath
-        if indexPath.section == 2 && indexPath.row == 2 {
+        if indexPath.section == 1 && indexPath.row == 2 {
             newIndexPath = IndexPath(row: 0, section: indexPath.section)
         }
         return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
@@ -212,8 +214,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     
     func showDatePicker() {
         datePickerVisible = true
-        let indexPathDateRow = IndexPath(row: 1, section: 2)
-        let indexPathDatePicker = IndexPath(row: 2, section: 2)
+        let indexPathDateRow = IndexPath(row: 1, section: 1)
+        let indexPathDatePicker = IndexPath(row: 2, section: 1)
         
         if let dateCell = tableView.cellForRow(at: indexPathDateRow) {
             dateCell.detailTextLabel!.textColor = dateCell.detailTextLabel!.tintColor
@@ -230,8 +232,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     func hideDatePicker() {
         if datePickerVisible {
             datePickerVisible = false
-            let indexPathDateRow = IndexPath(row: 1, section: 2)
-            let indexPathDatePicker = IndexPath(row: 2, section: 2)
+            let indexPathDateRow = IndexPath(row: 1, section: 1)
+            let indexPathDatePicker = IndexPath(row: 2, section: 1)
             
             if let cell = tableView.cellForRow(at: indexPathDateRow) {
                 cell.detailTextLabel!.textColor = UIColor.black
