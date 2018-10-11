@@ -11,6 +11,7 @@ import UIKit
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityDescriptionLabel: UILabel!
     @IBOutlet weak var conditionsLabel: UILabel!
+    @IBOutlet weak var weatherLabel: UILabel!
 }
 
 class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate {
@@ -31,6 +32,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
         cell.conditionsLabel?.text = "Temp: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
+        cell.weatherLabel?.text = "Weather: Sunny, Partly cloudy" // HOOK THIS UP TO USER ENTRY CONDITIONS CHECKMARK ARRAY
         return cell
     }
     

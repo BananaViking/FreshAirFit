@@ -57,6 +57,7 @@
                                 <connections>
                                     <outlet property="activityDescriptionLabel" destination="ERy-0h-GXU" id="azZ-o4-Aw3"/>
                                     <outlet property="conditionsLabel" destination="nFC-dS-2Lk" id="2ve-cg-leX"/>
+                                    <outlet property="weatherLabel" destination="Sxi-kg-Xm0" id="6A2-0t-lBn"/>
                                     <segue destination="sC6-LN-PIk" kind="show" identifier="editActivity" id="wbh-an-YAR"/>
                                 </connections>
                             </tableViewCell>
