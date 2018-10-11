@@ -40,6 +40,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var shouldNotifySwitch: UISwitch!
     @IBOutlet weak var notificationTimeLabel: UILabel!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var datePickerCell: UITableViewCell!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     //MARK: - IBActions
     @IBAction func notificationTimeChanged(_ datePicker: UIDatePicker) {
@@ -154,7 +156,9 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     func showDatePicker() {  // HQ DailyDetailVC
-        
+        datePickerVisible = true
+        let indexPathDatePicker = IndexPath(row: 2, section: 2)
+        tableView.insertRows(at: [indexPathDatePicker], with: .fade)
     }
     
     func hideDatePicker() {  // HQ DailyDetailVC
