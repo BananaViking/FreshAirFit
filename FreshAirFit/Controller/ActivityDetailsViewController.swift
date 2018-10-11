@@ -259,4 +259,11 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         hideDatePicker()
     }
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = "Back"
+        navigationItem.backBarButtonItem = backButtonItem
+    }
 }

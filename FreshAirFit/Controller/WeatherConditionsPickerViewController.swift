@@ -29,17 +29,28 @@ class WeatherConditionsPickerViewController: UITableViewController {
 //        cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
         cell.weatherIcon.image = UIImage(named: weatherConditionBank.weatherConditions[indexPath.row].weatherIcon)
         cell.weatherCondition.text = weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription
+        if weatherConditionBank.weatherConditions[indexPath.row].isChecked == false {
+            cell.accessoryType = .none
+        } else {
+            cell.accessoryType = .checkmark
+        }
         return cell
     }
+    
+    //******************************************************
+    //checkmarks aren't getting saved
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             if cell.accessoryType == .none {
                 cell.accessoryType = .checkmark
+                weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
             } else {
                 cell.accessoryType = .none
+                weatherConditionBank.weatherConditions[indexPath.row].isChecked = false
             }
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
