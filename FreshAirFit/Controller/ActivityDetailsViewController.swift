@@ -33,6 +33,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
 //        }
 //    }
     
+    //MARK: - IBOutlets
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var lowTempTextField: UITextField!
     @IBOutlet weak var highTempTextField: UITextField!
@@ -40,6 +41,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var notificationTimeLabel: UILabel!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
+    //MARK: - IBActions
     @IBAction func notificationTimeChanged(_ datePicker: UIDatePicker) {
         notifyTime = datePicker.date
         updateNotificationTimeLabel()
@@ -64,6 +66,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             activityToEdit.activityDescription = descriptionTextField.text!
             activityToEdit.lowTemp = lowTempTextField.text!
             activityToEdit.highTemp = highTempTextField.text!
+            activityToEdit.shouldNotify = shouldNotifySwitch.isOn
+            activityToEdit.notifyTime = notifyTime
             delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
         } else {
             hudView.text = "Added"
@@ -71,6 +75,8 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             activity.activityDescription = descriptionTextField.text!
             activity.lowTemp = lowTempTextField.text!
             activity.highTemp = highTempTextField.text!
+            activity.shouldNotify = shouldNotifySwitch.isOn
+            activity.notifyTime = notifyTime
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
         afterDelay(0.7) {
@@ -86,11 +92,11 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         resignFirstResponder()
     }
     
-    
+    //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
-        shouldNotifySwitch.isOn = activity.shouldNotify
+//        shouldNotifySwitch.isOn = activity.shouldNotify //do i need this line since have it in activityToEdit?
         
         if let activityToEdit = activityToEdit {
             title = "Edit Activity"
@@ -98,8 +104,11 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             descriptionTextField.text = activityToEdit.activityDescription
             lowTempTextField.text = activityToEdit.lowTemp
             highTempTextField.text = activityToEdit.highTemp
+            shouldNotifySwitch.isOn = activityToEdit.shouldNotify
+            notifyTime = activityToEdit.notifyTime
         }
         
+        updateNotificationTimeLabel()
         listenForBackgroundNotification()
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
