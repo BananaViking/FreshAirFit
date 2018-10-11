@@ -73,7 +73,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             activity.highTemp = highTempTextField.text!
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
-        afterDelay(0.6) {
+        afterDelay(0.7) {
             hudView.hide()
         }
     }

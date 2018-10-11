@@ -19,7 +19,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
-        loadActivities()  //do I still need this?
+        loadActivities()  //do I still need this? check book
     }
 
     //MARK: - TableView Delegate Functions
@@ -30,7 +30,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
-        cell.conditionsLabel?.text = "Temp. range: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
+        cell.conditionsLabel?.text = "Temp: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
         return cell
     }
     
