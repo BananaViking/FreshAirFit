@@ -118,7 +118,60 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     //MARK: - TableView Delegate Functions
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 2 && datePickerVisible {
+            return 3
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 2 && indexPath.row == 2 {
+            return datePickerCell
+        } else {
+            return super.tableView(tableView, cellForRowAt: indexPath)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 && indexPath.row == 2 {
+            return 163
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if indexPath.section == 2 && indexPath.row == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        descriptionTextField.resignFirstResponder()
+        
+        if indexPath.section == 2 && indexPath.row == 1 {
+            if !datePickerVisible {
+                showDatePicker()
+            } else {
+                hideDatePicker()
+            }
+        }
+    }
+    
+    // need this since overriding data source for a static table view cell otherwise crash
+    // data source doesn't know about the datePicker cell so trick it into thinking there are 3 rows when picker visible
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        var newIndexPath = indexPath
+        if indexPath.section == 2 && indexPath.row == 2 {
+            newIndexPath = IndexPath(row: 0, section: indexPath.section)
+        }
+        return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
+    }
     
     //MARK: - Other Functions
     func listenForBackgroundNotification() {
@@ -155,14 +208,39 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         notificationTimeLabel.text = formatter.string(from: notifyTime)
     }
     
-    func showDatePicker() {  // HQ DailyDetailVC
+    func showDatePicker() {
         datePickerVisible = true
+        let indexPathDateRow = IndexPath(row: 1, section: 2)
         let indexPathDatePicker = IndexPath(row: 2, section: 2)
+        
+        if let dateCell = tableView.cellForRow(at: indexPathDateRow) {
+            dateCell.detailTextLabel!.textColor = dateCell.detailTextLabel!.tintColor
+        }
+        
+        // since doing two things to table view at same time, need the update calls so animate at same time
+        tableView.beginUpdates()
         tableView.insertRows(at: [indexPathDatePicker], with: .fade)
+        tableView.reloadRows(at: [indexPathDateRow], with: .none)
+        tableView.endUpdates()
+        datePicker.setDate(notifyTime, animated: false)
     }
     
-    func hideDatePicker() {  // HQ DailyDetailVC
-        
+    func hideDatePicker() {
+        if datePickerVisible {
+            datePickerVisible = false
+            let indexPathDateRow = IndexPath(row: 1, section: 2)
+            let indexPathDatePicker = IndexPath(row: 2, section: 2)
+            
+            if let cell = tableView.cellForRow(at: indexPathDateRow) {
+                cell.detailTextLabel!.textColor = UIColor.black
+            }
+            
+            // since doing two things to table view at same time, need the update calls so animate at same time
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPathDateRow], with: .none)
+            tableView.deleteRows(at: [indexPathDatePicker], with: .fade)
+            tableView.endUpdates()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -172,5 +250,9 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         
         doneBarButton.isEnabled = !newText.isEmpty
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        hideDatePicker()
     }
 }

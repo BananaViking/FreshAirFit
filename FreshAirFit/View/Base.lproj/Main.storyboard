@@ -303,6 +303,9 @@
                                 <date key="date" timeIntervalSinceReferenceDate="560967605.75155795">
                                     <!--2018-10-11 16:20:05 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="notificationTimeChanged:" destination="sC6-LN-PIk" eventType="valueChanged" id="N8b-6t-gAh"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <constraints>
