@@ -213,6 +213,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     func showDatePicker() {
+        datePicker.datePickerMode = .time
         datePickerVisible = true
         let indexPathDateRow = IndexPath(row: 1, section: 1)
         let indexPathDatePicker = IndexPath(row: 2, section: 1)
