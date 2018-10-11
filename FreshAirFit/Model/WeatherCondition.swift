@@ -9,7 +9,12 @@
 import UIKit
 
 class WeatherCondition {
-    var weatherIcon: UIImage?
-    var weatherConditionDescription = ""
+    var weatherIcon: String
+    var weatherConditionDescription: String
     var isChecked = false
+    
+    init(weatherIcon: String, weatherConditionDescription: String) {
+        self.weatherIcon = weatherIcon
+        self.weatherConditionDescription = weatherConditionDescription
+    }
 }
