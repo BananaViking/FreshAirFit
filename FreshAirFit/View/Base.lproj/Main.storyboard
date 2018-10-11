@@ -291,7 +291,7 @@
             </objects>
             <point key="canvasLocation" x="1668.75" y="24.295774647887324"/>
         </scene>
-        <!--Weather Conditions Picker View Controller-->
+        <!--Weather Conditions-->
         <scene sceneID="aII-GD-vkA">
             <objects>
                 <tableViewController id="Waq-yK-ehG" customClass="WeatherConditionsPickerViewController" customModule="FreshAirFit" customModuleProvider="target" sceneMemberID="viewController">
@@ -333,6 +333,7 @@
                             <outlet property="delegate" destination="Waq-yK-ehG" id="igI-vJ-DzO"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Weather Conditions" id="WYe-Au-rqp"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hjw-4G-HQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
