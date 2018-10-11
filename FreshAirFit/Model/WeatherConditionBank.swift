@@ -14,9 +14,9 @@ class WeatherConditionBank {
         WeatherCondition(weatherIcon: "cloudy", weatherConditionDescription: "Cloudy"),
         WeatherCondition(weatherIcon: "overcast", weatherConditionDescription: "Overcast"),
         WeatherCondition(weatherIcon: "fog", weatherConditionDescription: "Fog"),
-        WeatherCondition(weatherIcon: "lightRain", weatherConditionDescription: "Light Rain"),
+        WeatherCondition(weatherIcon: "lightRain", weatherConditionDescription: "Light rain"),
         WeatherCondition(weatherIcon: "shower", weatherConditionDescription: "Showers"),
-        WeatherCondition(weatherIcon: "thunderStorm", weatherConditionDescription: "Thunder Storm"),
+        WeatherCondition(weatherIcon: "thunderStorm", weatherConditionDescription: "Thunderstorm"),
         WeatherCondition(weatherIcon: "snow", weatherConditionDescription: "Snow")
     ]
 }

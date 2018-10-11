@@ -14,15 +14,17 @@ class WeatherConditionsTableViewCell: UITableViewCell {
 }
 
 class WeatherConditionsPickerViewController: UITableViewController {
+    let weatherConditionBank = WeatherConditionBank()
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return weatherConditionBank.weatherConditions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherConditionsTableViewCell
 //        cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
-        cell.weatherIcon.image = UIImage(named: "sunny")
-        cell.weatherCondition.text = "Sunny"
+        cell.weatherIcon.image = UIImage(named: weatherConditionBank.weatherConditions[indexPath.row].weatherIcon)
+        cell.weatherCondition.text = weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription
         return cell
     }
     
