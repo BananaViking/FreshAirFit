@@ -16,6 +16,10 @@ class WeatherConditionsTableViewCell: UITableViewCell {
 class WeatherConditionsPickerViewController: UITableViewController {
     let weatherConditionBank = WeatherConditionBank()
     
+    override func viewDidLoad() {
+        tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weatherConditionBank.weatherConditions.count
     }

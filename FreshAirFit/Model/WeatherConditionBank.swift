@@ -12,8 +12,8 @@ class WeatherConditionBank {
     let weatherConditions = [
         WeatherCondition(weatherIcon: "sunny", weatherConditionDescription: "Sunny"),
         WeatherCondition(weatherIcon: "cloudy", weatherConditionDescription: "Cloudy"),
-        WeatherCondition(weatherIcon: "overcast", weatherConditionDescription: "Overcast"),
         WeatherCondition(weatherIcon: "fog", weatherConditionDescription: "Fog"),
+        WeatherCondition(weatherIcon: "overcast", weatherConditionDescription: "Overcast"),
         WeatherCondition(weatherIcon: "lightRain", weatherConditionDescription: "Light rain"),
         WeatherCondition(weatherIcon: "shower", weatherConditionDescription: "Showers"),
         WeatherCondition(weatherIcon: "thunderStorm", weatherConditionDescription: "Thunderstorm"),
