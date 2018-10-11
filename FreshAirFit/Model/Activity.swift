@@ -30,7 +30,7 @@ class Activity: NSObject, Codable {
         return activityID
     }
     
-    func scheduleNotification() {  // HQ Daily.swift
+    func scheduleNotification() {
         removeNotification()
         if shouldNotify {
             let content = UNMutableNotificationContent()
@@ -44,10 +44,11 @@ class Activity: NSObject, Codable {
             let request = UNNotificationRequest(identifier: "\(activityID)", content: content, trigger: trigger)
             let center = UNUserNotificationCenter.current()
             center.add(request)
+            print("Scheduled: \(request) for activityID: \(activityID)")
         }
     }
     
-    func removeNotification() {  // HQ Daily.swift
+    func removeNotification() {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: ["\(activityID)"])
     }

@@ -70,6 +70,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             activityToEdit.highTemp = highTempTextField.text!
             activityToEdit.shouldNotify = shouldNotifySwitch.isOn
             activityToEdit.notifyTime = notifyTime
+            activityToEdit.scheduleNotification()
             delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
         } else {
             hudView.text = "Added"
@@ -79,6 +80,7 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
             activity.highTemp = highTempTextField.text!
             activity.shouldNotify = shouldNotifySwitch.isOn
             activity.notifyTime = notifyTime
+            activity.scheduleNotification()
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
         afterDelay(0.7) {
