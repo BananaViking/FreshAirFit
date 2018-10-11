@@ -20,6 +20,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
+        handleFirstTime()
         loadActivities()  //do I still need this? check book
     }
 
@@ -109,9 +110,17 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         let userDefaults = UserDefaults.standard
         let firstTime = userDefaults.bool(forKey: "FirstTime")
         
-        if firstTime {
+        if firstTime == true {
             userDefaults.set(false, forKey: "FirstTime")
             userDefaults.synchronize()
+            
+            let title = "Welcome to Fresh Air Fit!"
+            let message = "Click the + button at the top right to add a new Activity. Set temperature ranges and weather conditions for your activity and Fresh Air Fit will send you a notification the day before so you can get more outdoor exercise!"
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true)
+            print("handleFirstTime called")
         }
     }
     
