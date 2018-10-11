@@ -26,7 +26,6 @@ class WeatherConditionsPickerViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherConditionsTableViewCell
-//        cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
         cell.weatherIcon.image = UIImage(named: weatherConditionBank.weatherConditions[indexPath.row].weatherIcon)
         cell.weatherCondition.text = weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription
         if weatherConditionBank.weatherConditions[indexPath.row].isChecked == false {
@@ -54,6 +53,6 @@ class WeatherConditionsPickerViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // need to add deselect row after click, add checkmark, feed data back to other VC's
+    // need to feed data back to other VC's
     // make an array for all checked weather conditions and AVC label should display "Weather: " then list whole array for checked conditions
 }
