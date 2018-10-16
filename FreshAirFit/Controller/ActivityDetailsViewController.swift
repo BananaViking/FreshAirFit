@@ -21,6 +21,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     var notifyTime = Date()
     var datePickerVisible = false
     var observer: Any!
+    var selectedWeatherConditions = [String]()
     weak var delegate: ActivityDetailsViewControllerDelegate?
     
 //    var activityToEdit: Activity? {
@@ -70,6 +71,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activityToEdit.highTemp = highTempTextField.text!
             activityToEdit.shouldNotify = shouldNotifySwitch.isOn
             activityToEdit.notifyTime = notifyTime
+            activityToEdit.activityWeatherConditions = selectedWeatherConditions
             activityToEdit.scheduleNotification()
             delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
         } else {
@@ -80,6 +82,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activity.highTemp = highTempTextField.text!
             activity.shouldNotify = shouldNotifySwitch.isOn
             activity.notifyTime = notifyTime
+            activity.activityWeatherConditions = selectedWeatherConditions
             activity.scheduleNotification()
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
@@ -179,7 +182,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     
     //MARK: - WeatherConditionsPickerViewControllerDelegate Functions
     func updateWeatherConditions(conditions: [String]) {
-        activity.activityWeatherConditions = conditions
+        selectedWeatherConditions = conditions
     }
     
     //MARK: - Other Functions
