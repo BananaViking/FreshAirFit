@@ -64,6 +64,19 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     
     @IBAction func doneBarButtonPressed() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        
+        let title = "Warning:"
+        let message = "\"Low temp.\" value must be less than \"High temp.\" value."
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        if let lowTempInt = Int(lowTempTextField.text!), let highTempInt = Int(highTempTextField.text!) {
+            if lowTempInt >= highTempInt {
+                hudView.hide()
+                present(alert, animated: true)
+            }
+        }
+        
         if let activityToEdit = activityToEdit {
             hudView.text = "Updated"
             activityToEdit.activityDescription = descriptionTextField.text!
