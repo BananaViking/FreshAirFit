@@ -23,6 +23,11 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         handleFirstTime()
         loadActivities()  //do I still need this? check book
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     //MARK: - TableView Delegate Functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,7 +37,17 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
-        cell.conditionsLabel?.text = "Temp: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
+        
+        var conditionsLabelText = "Temp: "
+        if !activities[indexPath.row].lowTemp.isEmpty && activities[indexPath.row].highTemp.isEmpty {
+            conditionsLabelText += ">\(activities[indexPath.row].lowTemp)°"
+        } else if activities[indexPath.row].lowTemp.isEmpty && !activities[indexPath.row].highTemp.isEmpty {
+            conditionsLabelText += "<\(activities[indexPath.row].highTemp)°"
+        } else if !activities[indexPath.row].lowTemp.isEmpty && !activities[indexPath.row].highTemp.isEmpty {
+            conditionsLabelText += "\(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
+        }
+        cell.conditionsLabel?.text = conditionsLabelText
+        
         var weatherLabelText = "Weather: "
         var firstLoop = true
         for condition in activities[indexPath.row].activityWeatherConditions {
@@ -44,7 +59,6 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             }
         }
         cell.weatherLabel?.text = weatherLabelText
-//        cell.weatherLabel?.text = "Weather: \(activities[indexPath.row].activityWeatherConditions)" // HOOK THIS UP TO USER ENTRY CONDITIONS CHECKMARK ARRAY
         return cell
     }
     
