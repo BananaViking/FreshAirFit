@@ -177,9 +177,9 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
     }
     
-    //MARK: - WeatherConditionsPickerViewControllerDelegate Funnctions
-    func weatherPickerViewController(_ controller: WeatherConditionsPickerViewController, didFinishUpdating conditions: [String]) {
-        <#code#>
+    //MARK: - WeatherConditionsPickerViewControllerDelegate Functions
+    func updateWeatherConditions(conditions: [String]) {
+        activity.activityWeatherConditions = conditions
     }
     
     //MARK: - Other Functions

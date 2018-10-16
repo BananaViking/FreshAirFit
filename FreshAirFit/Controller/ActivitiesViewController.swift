@@ -33,7 +33,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
         cell.conditionsLabel?.text = "Temp: \(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
-        cell.weatherLabel?.text = "Weather: Sunny, Partly cloudy" // HOOK THIS UP TO USER ENTRY CONDITIONS CHECKMARK ARRAY
+        cell.weatherLabel?.text = "Weather: \(activities[indexPath.row].activityWeatherConditions)" // HOOK THIS UP TO USER ENTRY CONDITIONS CHECKMARK ARRAY
         return cell
     }
     

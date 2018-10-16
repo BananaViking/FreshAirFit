@@ -14,7 +14,7 @@ class WeatherConditionsTableViewCell: UITableViewCell {
 }
 
 protocol WeatherConditionsPickerViewControllerDelegate: class {
-    func weatherPickerViewController(_ controller: WeatherConditionsPickerViewController, didFinishUpdating conditions: [String])
+    func updateWeatherConditions(conditions: [String])
 }
 
 class WeatherConditionsPickerViewController: UITableViewController {
@@ -51,13 +51,15 @@ class WeatherConditionsPickerViewController: UITableViewController {
                 cell.accessoryType = .checkmark
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
                 selectedWeatherConditions.append(weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription)
-                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
+//                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
+                delegate?.updateWeatherConditions(conditions: selectedWeatherConditions)
                 print(selectedWeatherConditions)
             } else {
                 cell.accessoryType = .none
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = false
                 selectedWeatherConditions.removeAll { $0 == weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription }
-                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
+//                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
+                delegate?.updateWeatherConditions(conditions: selectedWeatherConditions)
                 print(selectedWeatherConditions)
             }
         }
