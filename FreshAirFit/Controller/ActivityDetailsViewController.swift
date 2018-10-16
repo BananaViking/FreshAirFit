@@ -177,6 +177,11 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
     }
     
+    //MARK: - WeatherConditionsPickerViewControllerDelegate Funnctions
+    func weatherPickerViewController(_ controller: WeatherConditionsPickerViewController, didFinishUpdating conditions: [String]) {
+        <#code#>
+    }
+    
     //MARK: - Other Functions
     func listenForBackgroundNotification() {
         observer = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
