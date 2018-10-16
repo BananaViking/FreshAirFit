@@ -36,7 +36,7 @@ class Activity: NSObject, Codable {
         if shouldNotify {
             let content = UNMutableNotificationContent()
             content.title = "Just thought you'd like to know..."
-            content.body = notifyText
+            content.body = "Tomorrow will be TEMP and WEATHER CONDITION. It might be a nice day to \(activityDescription.lowercased())!"
             content.sound = UNNotificationSound.default
             
             let calendar = Calendar(identifier: .gregorian)
