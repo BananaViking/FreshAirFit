@@ -51,22 +51,16 @@ class WeatherConditionsPickerViewController: UITableViewController {
                 cell.accessoryType = .checkmark
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
                 selectedWeatherConditions.append(weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription)
-//                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
                 delegate?.updateWeatherConditions(conditions: selectedWeatherConditions)
                 print(selectedWeatherConditions)
             } else {
                 cell.accessoryType = .none
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = false
                 selectedWeatherConditions.removeAll { $0 == weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription }
-//                delegate?.weatherPickerViewController(self, didFinishUpdating: selectedWeatherConditions)
                 delegate?.updateWeatherConditions(conditions: selectedWeatherConditions)
                 print(selectedWeatherConditions)
             }
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    // need to feed data back to other VC's
-    // make an array for all checked weather conditions and AVC label should display "Weather: " then list whole array for checked conditions
 }
