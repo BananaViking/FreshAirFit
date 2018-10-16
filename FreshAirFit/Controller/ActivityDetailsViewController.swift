@@ -65,6 +65,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     @IBAction func doneBarButtonPressed() {
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         
+        #warning("handle invalid temp. range inputs better")
         let title = "Warning:"
         let message = "\"Low temp.\" value must be less than \"High temp.\" value."
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
