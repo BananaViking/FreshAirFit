@@ -208,6 +208,8 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             return
         }
         descriptionTextField.resignFirstResponder()
+        lowTempTextField.resignFirstResponder()
+        highTempTextField.resignFirstResponder()
     }
     
     func afterDelay(_ seconds: Double, run: @escaping () -> Void) {
