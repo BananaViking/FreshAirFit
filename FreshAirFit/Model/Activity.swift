@@ -15,7 +15,6 @@ class Activity: NSObject, Codable {
     var activityWeatherConditions = [String]()
     var shouldNotify = false
     var notifyTime = Date()
-    var notifyText = ""  // need to make this something like "tomorrow will be \(temp) and \(weatherCondition). might be a nice day to \(activityDescription)" and include weatherIcon?
     var activityID: Int
     
     override init() {

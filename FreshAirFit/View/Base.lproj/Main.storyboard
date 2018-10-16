@@ -256,7 +256,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.80112906679999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <segue destination="Waq-yK-ehG" kind="show" id="Arm-5E-Kc3"/>
+                                            <segue destination="Waq-yK-ehG" kind="show" identifier="weatherConditionsSegue" id="Arm-5E-Kc3"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

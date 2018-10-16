@@ -13,8 +13,14 @@ class WeatherConditionsTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherCondition: UILabel!
 }
 
+protocol WeatherConditionsPickerViewControllerDelegate: class {
+    
+}
+
 class WeatherConditionsPickerViewController: UITableViewController {
+    weak var delegate: WeatherConditionsPickerViewControllerDelegate?
     let weatherConditionBank = WeatherConditionBank()
+    var selectedWeatherConditions = [String]()
     
     override func viewDidLoad() {
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
@@ -44,9 +50,13 @@ class WeatherConditionsPickerViewController: UITableViewController {
             if cell.accessoryType == .none {
                 cell.accessoryType = .checkmark
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
+                selectedWeatherConditions.append(weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription)
+                print(selectedWeatherConditions)
             } else {
                 cell.accessoryType = .none
                 weatherConditionBank.weatherConditions[indexPath.row].isChecked = false
+                selectedWeatherConditions.removeAll { $0 == weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription }
+                print(selectedWeatherConditions)
             }
         }
         

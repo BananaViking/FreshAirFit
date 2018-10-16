@@ -15,7 +15,7 @@ protocol ActivityDetailsViewControllerDelegate: class {
     func activityDetailsViewController(_ controller: ActivityDetailsViewController, didFinishEditing activity: Activity)
 }
 
-class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate {
+class ActivityDetailsViewController: UITableViewController, WeatherConditionsPickerViewControllerDelegate, UITextFieldDelegate {
     var activity = Activity()
     var activityToEdit: Activity?
     var notifyTime = Date()
@@ -266,5 +266,10 @@ class ActivityDetailsViewController: UITableViewController, UITextFieldDelegate 
         let backButtonItem = UIBarButtonItem()
         backButtonItem.title = "Back"
         navigationItem.backBarButtonItem = backButtonItem
+        
+        if segue.identifier == "weatherConditionsSegue" {
+            let controller = segue.destination as! WeatherConditionsPickerViewController
+            controller.delegate = self
+        }
     }
 }
