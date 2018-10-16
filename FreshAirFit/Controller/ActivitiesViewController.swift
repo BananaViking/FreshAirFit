@@ -38,13 +38,16 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ActivityTableViewCell
         cell.activityDescriptionLabel?.text = activities[indexPath.row].activityDescription
         
+        let lowTemp = activities[indexPath.row].lowTemp
+        let highTemp = activities[indexPath.row].highTemp
+        
         var conditionsLabelText = "Temp: "
-        if !activities[indexPath.row].lowTemp.isEmpty && activities[indexPath.row].highTemp.isEmpty {
-            conditionsLabelText += ">\(activities[indexPath.row].lowTemp)°"
-        } else if activities[indexPath.row].lowTemp.isEmpty && !activities[indexPath.row].highTemp.isEmpty {
-            conditionsLabelText += "<\(activities[indexPath.row].highTemp)°"
-        } else if !activities[indexPath.row].lowTemp.isEmpty && !activities[indexPath.row].highTemp.isEmpty {
-            conditionsLabelText += "\(activities[indexPath.row].lowTemp)° - \(activities[indexPath.row].highTemp)°"
+        if !lowTemp.isEmpty && highTemp.isEmpty {
+            conditionsLabelText += ">\(lowTemp)°"
+        } else if lowTemp.isEmpty && !highTemp.isEmpty {
+            conditionsLabelText += "<\(highTemp)°"
+        } else if !lowTemp.isEmpty && !highTemp.isEmpty {
+            conditionsLabelText += "\(lowTemp)° - \(highTemp)°"
         }
         cell.conditionsLabel?.text = conditionsLabelText
         
@@ -59,6 +62,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             }
         }
         cell.weatherLabel?.text = weatherLabelText
+        
         return cell
     }
     
