@@ -116,6 +116,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             
             let title = "Welcome to Fresh Air Fit!"
             let message = """
+
 • Click the + button at the top right to add a new Activity.
 
 • Set temperature ranges and weather conditions for your activity.
