@@ -108,20 +108,26 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     
     func handleFirstTime() {
         let userDefaults = UserDefaults.standard
-        let firstTime = userDefaults.bool(forKey: "FirstTime")
+        let launchedBefore = userDefaults.bool(forKey: "launchedBefore")
         
-        if firstTime == true {
-            userDefaults.set(false, forKey: "FirstTime")
+        if launchedBefore == false {
+            userDefaults.set(true, forKey: "launchedBefore")
             userDefaults.synchronize()
             
             let title = "Welcome to Fresh Air Fit!"
-            let message = "Click the + button at the top right to add a new Activity. Set temperature ranges and weather conditions for your activity and Fresh Air Fit will send you a notification the day before so you can get more outdoor exercise!"
+            let message = """
+• Click the + button at the top right to add a new Activity.
+
+• Set temperature ranges and weather conditions for your activity.
+
+• Receive a notification the day before so you can get more outdoor exercise!
+"""
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(action)
             present(alert, animated: true)
-            print("handleFirstTime called")
         }
+        print("launchedBefore = \(launchedBefore)")
     }
     
     //MARK: - Navigation
