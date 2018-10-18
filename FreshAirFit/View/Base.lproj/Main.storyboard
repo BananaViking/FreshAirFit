@@ -25,22 +25,22 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="yGV-ui-YpH">
-                                            <rect key="frame" x="20" y="19.5" width="106.5" height="60.5"/>
+                                            <rect key="frame" x="20" y="19.5" width="258" height="60.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERy-0h-GXU" userLabel="Activity Name">
-                                                    <rect key="frame" x="0.0" y="0.0" width="106.5" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conditions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFC-dS-2Lk">
-                                                    <rect key="frame" x="0.0" y="23.5" width="106.5" height="17"/>
+                                                    <rect key="frame" x="0.0" y="23.5" width="258" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxi-kg-Xm0" userLabel="Weather Label">
-                                                    <rect key="frame" x="0.0" y="43.5" width="106.5" height="17"/>
+                                                    <rect key="frame" x="0.0" y="43.5" width="258" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="yGV-ui-YpH" firstAttribute="leading" secondItem="YwS-Lv-ws2" secondAttribute="leading" constant="20" id="WUK-Fm-FI8"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yGV-ui-YpH" secondAttribute="trailing" id="sJN-yg-aKM"/>
                                         <constraint firstItem="yGV-ui-YpH" firstAttribute="centerY" secondItem="YwS-Lv-ws2" secondAttribute="centerY" id="wkw-0v-DRJ"/>
                                     </constraints>
                                 </tableViewCellContentView>
