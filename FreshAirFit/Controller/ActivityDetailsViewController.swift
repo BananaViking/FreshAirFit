@@ -127,6 +127,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             highTempTextField.text = activityToEdit.highTemp
             shouldNotifySwitch.isOn = activityToEdit.shouldNotify
             notifyTime = activityToEdit.notifyTime
+            print("conditions: \(activityToEdit.activityWeatherConditions)")
         }
         
         updateNotificationTimeLabel()
@@ -294,6 +295,10 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         if segue.identifier == "weatherConditionsSegue" {
             let controller = segue.destination as! WeatherConditionsPickerViewController
             controller.delegate = self
+            
+            if let activityToEdit = activityToEdit {
+                controller.selectedWeatherConditions = activityToEdit.activityWeatherConditions
+            }
         }
     }
 }

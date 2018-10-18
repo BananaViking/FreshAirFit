@@ -7,6 +7,9 @@
 //
 
 import UserNotifications
+import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class Activity: NSObject, Codable {
     var activityDescription = ""
@@ -16,6 +19,8 @@ class Activity: NSObject, Codable {
     var shouldNotify = false
     var notifyTime = Date()
     var activityID: Int
+    var notificationTemp: Int?
+    var notificationWeatherCondition: String?
     
     override init() {
         activityID = Activity.nextActivityID()

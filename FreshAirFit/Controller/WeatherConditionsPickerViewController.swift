@@ -24,6 +24,7 @@ class WeatherConditionsPickerViewController: UITableViewController {
     
     override func viewDidLoad() {
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
+        print("WCPVC conditions: \(selectedWeatherConditions)")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,6 +35,11 @@ class WeatherConditionsPickerViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherConditionsTableViewCell
         cell.weatherIcon.image = UIImage(named: weatherConditionBank.weatherConditions[indexPath.row].weatherIcon)
         cell.weatherCondition.text = weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription
+        
+        if selectedWeatherConditions.contains(weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription) {
+            weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
+        }
+        
         if weatherConditionBank.weatherConditions[indexPath.row].isChecked == false {
             cell.accessoryType = .none
         } else {
