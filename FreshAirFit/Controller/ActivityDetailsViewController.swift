@@ -117,7 +117,6 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
-//        shouldNotifySwitch.isOn = activity.shouldNotify //do i need this line since have it in activityToEdit?
         
         if let activityToEdit = activityToEdit {
             title = "Edit Activity"
@@ -127,7 +126,6 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             highTempTextField.text = activityToEdit.highTemp
             shouldNotifySwitch.isOn = activityToEdit.shouldNotify
             notifyTime = activityToEdit.notifyTime
-            print("conditions: \(activityToEdit.activityWeatherConditions)")
         }
         
         updateNotificationTimeLabel()
@@ -135,6 +133,11 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    #warning("remove this viewWillAppear used just to print log")
+    override func viewWillAppear(_ animated: Bool) {
+        print("conditions: \(activityToEdit!.activityWeatherConditions)")
     }
     
     //MARK: - TableView Delegate Functions

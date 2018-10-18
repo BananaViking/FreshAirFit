@@ -170,7 +170,8 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             controller.delegate = self
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 controller.activityToEdit = activities[indexPath.row]
-                controller.activityToEdit?.activityWeatherConditions = activities[indexPath.row].activityWeatherConditions
+//                controller.activityToEdit?.activityWeatherConditions = activities[indexPath.row].activityWeatherConditions
+                controller.selectedWeatherConditions = activities[indexPath.row].activityWeatherConditions
             }
         }
     }
