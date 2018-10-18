@@ -135,11 +135,6 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         tableView.addGestureRecognizer(gestureRecognizer)
     }
     
-    #warning("remove this viewWillAppear used just to print log")
-    override func viewWillAppear(_ animated: Bool) {
-        print("conditions: \(activityToEdit!.activityWeatherConditions)")
-    }
-    
     //MARK: - TableView Delegate Functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 && datePickerVisible {
