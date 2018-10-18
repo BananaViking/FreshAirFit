@@ -38,6 +38,7 @@ class WeatherConditionsPickerViewController: UITableViewController {
         
         if selectedWeatherConditions.contains(weatherConditionBank.weatherConditions[indexPath.row].weatherConditionDescription) {
             weatherConditionBank.weatherConditions[indexPath.row].isChecked = true
+            delegate?.updateWeatherConditions(conditions: selectedWeatherConditions)
         }
         
         if weatherConditionBank.weatherConditions[indexPath.row].isChecked == false {
