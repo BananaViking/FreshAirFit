@@ -18,7 +18,8 @@ class ActivityTableViewCell: UITableViewCell {
 }
 
 class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate, CLLocationManagerDelegate {
-    let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
+    //change last bit of weatherURL from "weather" to "forecast" to get 5 day forecast
+    let weatherURL = "http://api.openweathermap.org/data/2.5/forecast"
     let appID = "63b1578537bf98519c346221f7f4efda"
     let locationManager = CLLocationManager()
     let weatherData = WeatherData()
@@ -208,37 +209,35 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         }
     }
     
-    func checkWeather() {
-        
-    }
-    
     //MARK: - JSON Parsing
     func updateWeatherData(json: JSON) {
-        let tempResult = json["main"]["temp"].doubleValue
-        weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
-        weatherData.city = json["name"].stringValue
-        weatherData.conditionCode = json["weather"][0]["id"].intValue
+//        let tempResult = json["main"]["temp"].doubleValue
+//        weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
+//        weatherData.conditionCode = json["weather"][0]["id"].intValue
         
-        #warning("update these condition ranges from openweathermap.org/weather-conditions and also to read sensibly when inserted into notification sentence")
+        let tempResult = json["list"][5]["main"]["temp"].doubleValue
+        weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
+        weatherData.conditionCode = json["list"][5]["weather"][0]["id"].intValue
+        weatherData.date = json["list"][5]["dt_txt"].stringValue
+        
+        #warning("update these condition ranges from openweathermap.org/weather-conditions")
         switch weatherData.conditionCode {
         case 0...300, 772...799, 900...903, 905...1000:
-            weatherData.condition = "thunderstorm"
+            weatherData.condition = "with thunderstorms"
         case 301...500:
-            weatherData.condition = "light rain"
+            weatherData.condition = "with light rain"
         case 501...600:
-            weatherData.condition = "showers"
+            weatherData.condition = "with showers"
         case 601...700, 903:
-            weatherData.condition = "snowing"
+            weatherData.condition = "and snowing"
         case 701...771:
-            weatherData.condition = "fog"
-        case 800:
-            weatherData.condition = "sunny"
+            weatherData.condition = "with fog"
+        case 800, 904:
+            weatherData.condition = "and sunny"
         case 801...804:
-            weatherData.condition = "cloudy"
-        case 904 :
-            weatherData.condition = "sunny"
+            weatherData.condition = "and cloudy"
         default :
-            weatherData.condition = "unknown weather condition"
+            weatherData.condition = "with unknown weather conditions"
         }
         print(json)
     }
@@ -251,15 +250,20 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             controller.delegate = self
             controller.notificationTemp = String(weatherData.temperature)
             controller.notificationWeather = String(weatherData.condition)
+            
+            //get rid of date after testing
+            controller.notificationDate = weatherData.date
         } else if segue.identifier == "editActivity" {
             let controller = segue.destination as! ActivityDetailsViewController
             controller.delegate = self
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 controller.activityToEdit = activities[indexPath.row]
-//                controller.activityToEdit?.activityWeatherConditions = activities[indexPath.row].activityWeatherConditions
                 controller.selectedWeatherConditions = activities[indexPath.row].activityWeatherConditions
                 controller.notificationTemp = String(weatherData.temperature)
                 controller.notificationWeather = String(weatherData.condition)
+                
+                //get rid of date after testing
+                controller.notificationDate = weatherData.date
             }
         }
     }

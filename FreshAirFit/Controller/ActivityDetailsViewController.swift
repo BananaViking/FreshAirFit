@@ -26,15 +26,9 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     var selectedWeatherConditions = [String]()
     weak var delegate: ActivityDetailsViewControllerDelegate?
     
-//    var activityToEdit: Activity? {
-//        didSet {
-//            if let activity = activityToEdit {
-//                descriptionText = activity.description
-//                lowTemp = activity.lowTemp
-//                highTemp = activity.highTemp
-//            }
-//        }
-//    }
+    //get rid of date after testing
+    var notificationDate: String?
+
     
     //MARK: - IBOutlets
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -45,6 +39,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBOutlet weak var datePickerCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
     
     //MARK: - IBActions
     @IBAction func notificationTimeChanged(_ datePicker: UIDatePicker) {
@@ -88,8 +83,10 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activityToEdit.shouldNotify = shouldNotifySwitch.isOn
             activityToEdit.notifyTime = notifyTime
             activityToEdit.activityWeatherConditions = selectedWeatherConditions
-            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather {
-                activityToEdit.scheduleNotification(temp: notificationTemp, weather: notificationWeather)
+            
+            //get rid of date after testing
+            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather, let notificationDate = notificationDate {
+                activityToEdit.scheduleNotification(temp: notificationTemp, weather: notificationWeather, date: notificationDate)
             }
             delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
         } else {
@@ -101,8 +98,10 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activity.shouldNotify = shouldNotifySwitch.isOn
             activity.notifyTime = notifyTime
             activity.activityWeatherConditions = selectedWeatherConditions
-            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather {
-                activityToEdit?.scheduleNotification(temp: notificationTemp, weather: notificationWeather)
+            
+            //get rid of date after testing
+            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather, let notificationDate = notificationDate {
+                activityToEdit?.scheduleNotification(temp: notificationTemp, weather: notificationWeather, date: notificationDate)
             }
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
@@ -118,6 +117,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     @IBAction func doneKeyboardButtonPressed(_ sender: UITextField) {
         resignFirstResponder()
     }
+    
     
     //MARK: - Functions
     override func viewDidLoad() {
@@ -199,10 +199,12 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
         return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
     }
     
+    
     //MARK: - WeatherConditionsPickerViewControllerDelegate Functions
     func updateWeatherConditions(conditions: [String]) {
         selectedWeatherConditions = conditions
     }
+    
     
     //MARK: - Other Functions
     func listenForBackgroundNotification() {
@@ -289,6 +291,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     func textFieldDidBeginEditing(_ textField: UITextField) {
         hideDatePicker()
     }
+    
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

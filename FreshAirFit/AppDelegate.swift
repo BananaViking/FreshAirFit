@@ -26,7 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let vc = window?.rootViewController as? ActivitiesViewController {
-            vc.checkWeather()
+//            vc.locationManager.startUpdatingLocation()
+//
+//            let latitude = String(location.coordinate.latitude)
+//            let longitude = String(location.coordinate.longitude)
+//            let parameters = ["lat": latitude, "lon": longitude, "appid": appID]
+//
+//            vc.getWeatherData(url: weatherURL, parameters: parameters)
         }
         
     }

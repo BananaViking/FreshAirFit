@@ -35,12 +35,13 @@ class Activity: NSObject, Codable {
 
     }
     
-    func scheduleNotification(temp: String, weather: String) {
+    //get rid of date after testing
+    func scheduleNotification(temp: String, weather: String, date: String) {
         removeNotification()
         if shouldNotify {
             let content = UNMutableNotificationContent()
             content.title = "Just thought you'd like to know..."
-            content.body = "Tomorrow will be \(temp)° and \(weather). It might be a nice day to \(activityDescription.lowercased())!"
+            content.body = "Tomorrow (\(date)) will be \(temp)° \(weather). It might be a nice day to \(activityDescription.lowercased())!"
             content.sound = UNNotificationSound.default
             
             let calendar = Calendar(identifier: .gregorian)
