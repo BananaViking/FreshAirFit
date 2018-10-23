@@ -7,9 +7,6 @@
 //
 
 import UserNotifications
-import CoreLocation
-import Alamofire
-import SwiftyJSON
 
 class Activity: NSObject, Codable {
     var activityDescription = ""
@@ -19,8 +16,7 @@ class Activity: NSObject, Codable {
     var shouldNotify = false
     var notifyTime = Date()
     var activityID: Int
-    var notificationTemp: Int?
-    var notificationWeatherCondition: String?
+    
     
     override init() {
         activityID = Activity.nextActivityID()
@@ -35,12 +31,16 @@ class Activity: NSObject, Codable {
         return activityID
     }
     
-    func scheduleNotification() {
+    func updateNotificationValues(temp: Double, weather: String) {
+
+    }
+    
+    func scheduleNotification(temp: String, weather: String) {
         removeNotification()
         if shouldNotify {
             let content = UNMutableNotificationContent()
             content.title = "Just thought you'd like to know..."
-            content.body = "Tomorrow will be TEMP and WEATHER CONDITION. It might be a nice day to \(activityDescription.lowercased())!"
+            content.body = "Tomorrow will be \(temp)° and \(weather). It might be a nice day to \(activityDescription.lowercased())!"
             content.sound = UNNotificationSound.default
             
             let calendar = Calendar(identifier: .gregorian)

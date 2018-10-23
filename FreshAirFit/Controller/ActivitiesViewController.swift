@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityDescriptionLabel: UILabel!
@@ -14,12 +17,23 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherLabel: UILabel!
 }
 
-class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate {
+class ActivitiesViewController: UITableViewController, ActivityDetailsViewControllerDelegate, CLLocationManagerDelegate {
+    let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
+    let appID = "63b1578537bf98519c346221f7f4efda"
+    let locationManager = CLLocationManager()
+    let weatherData = WeatherData()
+    
     var activities = [Activity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundView = UIImageView(image: UIImage(named: "blueSkies"))
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
         handleFirstTime()
         loadActivities()  //do I still need this? check book
     }
@@ -160,11 +174,83 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         print("launchedBefore = \(launchedBefore)")
     }
     
+    //MARK: - LocationManager Delegate Functions
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last!
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            
+            let latitude = String(location.coordinate.latitude)
+            let longitude = String(location.coordinate.longitude)
+            let parameters = ["lat": latitude, "lon": longitude, "appid": appID]
+            
+            getWeatherData(url: weatherURL, parameters: parameters)
+            print("longitude = \(longitude), latitude = \(latitude)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    
+    //MARK: - Networking
+    func getWeatherData(url: String, parameters: [String: String]) {
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            if response.result.isSuccess {
+                print("Success! Got the weather data.")
+                let weatherJSON = JSON(response.result.value!)
+                self.updateWeatherData(json: weatherJSON)
+            } else {
+                print("Error: \(response.result.error!)")
+            }
+        }
+    }
+    
+    func checkWeather() {
+        
+    }
+    
+    //MARK: - JSON Parsing
+    func updateWeatherData(json: JSON) {
+        let tempResult = json["main"]["temp"].doubleValue
+        weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
+        weatherData.city = json["name"].stringValue
+        weatherData.conditionCode = json["weather"][0]["id"].intValue
+        
+        #warning("update these condition ranges from openweathermap.org/weather-conditions and also to read sensibly when inserted into notification sentence")
+        switch weatherData.conditionCode {
+        case 0...300, 772...799, 900...903, 905...1000:
+            weatherData.condition = "thunderstorm"
+        case 301...500:
+            weatherData.condition = "light rain"
+        case 501...600:
+            weatherData.condition = "showers"
+        case 601...700, 903:
+            weatherData.condition = "snowing"
+        case 701...771:
+            weatherData.condition = "fog"
+        case 800:
+            weatherData.condition = "sunny"
+        case 801...804:
+            weatherData.condition = "cloudy"
+        case 904 :
+            weatherData.condition = "sunny"
+        default :
+            weatherData.condition = "unknown weather condition"
+        }
+        print(json)
+    }
+    
+    
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addActivity" {
             let controller = segue.destination as! ActivityDetailsViewController
             controller.delegate = self
+            controller.notificationTemp = String(weatherData.temperature)
+            controller.notificationWeather = String(weatherData.condition)
         } else if segue.identifier == "editActivity" {
             let controller = segue.destination as! ActivityDetailsViewController
             controller.delegate = self
@@ -172,6 +258,8 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
                 controller.activityToEdit = activities[indexPath.row]
 //                controller.activityToEdit?.activityWeatherConditions = activities[indexPath.row].activityWeatherConditions
                 controller.selectedWeatherConditions = activities[indexPath.row].activityWeatherConditions
+                controller.notificationTemp = String(weatherData.temperature)
+                controller.notificationWeather = String(weatherData.condition)
             }
         }
     }

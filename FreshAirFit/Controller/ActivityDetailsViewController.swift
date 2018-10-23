@@ -21,6 +21,8 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
     var notifyTime = Date()
     var datePickerVisible = false
     var observer: Any!
+    var notificationTemp: String?
+    var notificationWeather: String?
     var selectedWeatherConditions = [String]()
     weak var delegate: ActivityDetailsViewControllerDelegate?
     
@@ -86,7 +88,9 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activityToEdit.shouldNotify = shouldNotifySwitch.isOn
             activityToEdit.notifyTime = notifyTime
             activityToEdit.activityWeatherConditions = selectedWeatherConditions
-            activityToEdit.scheduleNotification()
+            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather {
+                activityToEdit.scheduleNotification(temp: notificationTemp, weather: notificationWeather)
+            }
             delegate?.activityDetailsViewController(self, didFinishEditing: activityToEdit)
         } else {
             hudView.text = "Added"
@@ -97,7 +101,9 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             activity.shouldNotify = shouldNotifySwitch.isOn
             activity.notifyTime = notifyTime
             activity.activityWeatherConditions = selectedWeatherConditions
-            activity.scheduleNotification()
+            if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather {
+                activityToEdit?.scheduleNotification(temp: notificationTemp, weather: notificationWeather)
+            }
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
         afterDelay(0.7) {

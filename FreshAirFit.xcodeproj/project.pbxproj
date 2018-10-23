@@ -15,6 +15,7 @@
 		05560212216BF2DD0055E46E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05560211216BF2DD0055E46E /* Activity.swift */; };
 		05B001B9216BFAD60004E18E /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B001B8216BFAD60004E18E /* ActivityDetailsViewController.swift */; };
 		05B001BB216C07F40004E18E /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B001BA216C07F40004E18E /* HudView.swift */; };
+		05B3B984217F87D30071A107 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B3B983217F87D30071A107 /* WeatherData.swift */; };
 		05EBD888216ECD3900BF77C8 /* WeatherConditionsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EBD887216ECD3900BF77C8 /* WeatherConditionsPickerViewController.swift */; };
 		05EBD88A216ED1FF00BF77C8 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EBD889216ED1FF00BF77C8 /* WeatherCondition.swift */; };
 		05EBD88C216EE3C300BF77C8 /* WeatherConditionBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EBD88B216EE3C300BF77C8 /* WeatherConditionBank.swift */; };
@@ -32,6 +33,7 @@
 		05560211216BF2DD0055E46E /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		05B001B8216BFAD60004E18E /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		05B001BA216C07F40004E18E /* HudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
+		05B3B983217F87D30071A107 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		05EBD887216ECD3900BF77C8 /* WeatherConditionsPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionsPickerViewController.swift; sourceTree = "<group>"; };
 		05EBD889216ED1FF00BF77C8 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		05EBD88B216EE3C300BF77C8 /* WeatherConditionBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionBank.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				05560211216BF2DD0055E46E /* Activity.swift */,
 				05EBD889216ED1FF00BF77C8 /* WeatherCondition.swift */,
 				05EBD88B216EE3C300BF77C8 /* WeatherConditionBank.swift */,
+				05B3B983217F87D30071A107 /* WeatherData.swift */,
 				05B001BA216C07F40004E18E /* HudView.swift */,
 			);
 			path = Model;
@@ -164,6 +167,11 @@
 				TargetAttributes = {
 					055601F8216BE4D00055E46E = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -251,6 +259,7 @@
 				055601FF216BE4D00055E46E /* ActivitiesViewController.swift in Sources */,
 				05EBD888216ECD3900BF77C8 /* WeatherConditionsPickerViewController.swift in Sources */,
 				055601FD216BE4D00055E46E /* AppDelegate.swift in Sources */,
+				05B3B984217F87D30071A107 /* WeatherData.swift in Sources */,
 				05EBD88A216ED1FF00BF77C8 /* WeatherCondition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
