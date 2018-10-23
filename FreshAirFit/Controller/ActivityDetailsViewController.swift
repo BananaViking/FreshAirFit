@@ -101,7 +101,7 @@ class ActivityDetailsViewController: UITableViewController, WeatherConditionsPic
             
             //get rid of date after testing
             if let notificationTemp = notificationTemp, let notificationWeather = notificationWeather, let notificationDate = notificationDate {
-                activityToEdit?.scheduleNotification(temp: notificationTemp, weather: notificationWeather, date: notificationDate)
+                activity.scheduleNotification(temp: notificationTemp, weather: notificationWeather, date: notificationDate)
             }
             delegate?.activityDetailsViewController(self, didFinishAdding: activity)
         }
