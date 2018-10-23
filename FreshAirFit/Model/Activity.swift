@@ -17,7 +17,6 @@ class Activity: NSObject, Codable {
     var notifyTime = Date()
     var activityID: Int
     
-    
     override init() {
         activityID = Activity.nextActivityID()
         super.init()
@@ -29,10 +28,6 @@ class Activity: NSObject, Codable {
         userDefaults.set(activityID + 1, forKey: "ActivityID")
         userDefaults.synchronize()
         return activityID
-    }
-    
-    func updateNotificationValues(temp: Double, weather: String) {
-
     }
     
     //get rid of date after testing
