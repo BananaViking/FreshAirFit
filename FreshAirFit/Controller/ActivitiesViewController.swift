@@ -209,13 +209,11 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         }
     }
     
-    //MARK: - JSON Parsing
     func updateWeatherData(json: JSON) {
-//        let tempResult = json["main"]["temp"].doubleValue
-//        weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
-//        weatherData.conditionCode = json["weather"][0]["id"].intValue
-        
+        //["list"][5] is the weather for noon of the next calendar day
         let tempResult = json["list"][5]["main"]["temp"].doubleValue
+        
+        //convert kelvin to fahrenheit:
         weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
         weatherData.conditionCode = json["list"][5]["weather"][0]["id"].intValue
         weatherData.date = json["list"][5]["dt_txt"].stringValue
@@ -240,6 +238,50 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             weatherData.condition = "with unknown weather conditions"
         }
         print(json)
+    }
+    
+    #warning("this func is new and not sure it works")
+    func scheduleNotification() {
+        locationManager.startUpdatingLocation()
+        
+        let locations = [CLLocation]()
+        let location = locations.last!
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            
+            let latitude = String(location.coordinate.latitude)
+            let longitude = String(location.coordinate.longitude)
+            let parameters = ["lat": latitude, "lon": longitude, "appid": appID]
+            
+            getWeatherData(url: weatherURL, parameters: parameters)
+            print("longitude = \(longitude), latitude = \(latitude)")
+        }
+        
+        for activity in activities {
+            switch activity.shouldNotify {
+            case !activity.lowTemp.isEmpty && weatherData.temperature > Int(activity.lowTemp)! && activity.highTemp.isEmpty:
+                if activity.activityWeatherConditions.contains(weatherData.condition) {
+                    activity.shouldNotify = true
+                } else {
+                    activity.shouldNotify = false
+                }
+            case !activity.highTemp.isEmpty && weatherData.temperature < Int(activity.highTemp)! && activity.lowTemp.isEmpty:
+                if activity.activityWeatherConditions.contains(weatherData.condition) {
+                    activity.shouldNotify = true
+                } else {
+                    activity.shouldNotify = false
+                }
+            case !activity.highTemp.isEmpty && !activity.lowTemp.isEmpty && Int(activity.lowTemp)!...Int(activity.highTemp)! ~= weatherData.temperature:
+                if activity.activityWeatherConditions.contains(weatherData.condition) {
+                    activity.shouldNotify = true
+                } else {
+                    activity.shouldNotify = false
+                }
+            default:
+               activity.shouldNotify = false
+            }
+        }
     }
     
     

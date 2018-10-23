@@ -31,7 +31,7 @@ class Activity: NSObject, Codable {
     }
     
     //get rid of date after testing
-    func scheduleNotification(temp: String, weather: String, date: String) {
+    func setupNotification(temp: String, weather: String, date: String) {
         removeNotification()
         if shouldNotify {
             let content = UNMutableNotificationContent()
