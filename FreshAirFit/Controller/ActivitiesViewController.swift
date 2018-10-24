@@ -281,6 +281,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             default:
                activity.shouldNotify = false
             }
+            saveActivities()
         }
     }
     
