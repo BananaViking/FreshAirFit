@@ -23,6 +23,7 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
     let appID = "63b1578537bf98519c346221f7f4efda"
     let locationManager = CLLocationManager()
     let weatherData = WeatherData()
+//    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
     var activities = [Activity]()
     
@@ -215,33 +216,31 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
         
         //convert kelvin to fahrenheit:
         weatherData.temperature = Int(9/5 * (tempResult - 273) + 32)
-        weatherData.conditionCode = json["list"][5]["weather"][0]["id"].intValue
+        weatherData.condition = json["list"][5]["weather"][0]["description"].stringValue
         weatherData.date = json["list"][5]["dt_txt"].stringValue
-        
-        #warning("update these condition ranges from openweathermap.org/weather-conditions")
-        switch weatherData.conditionCode {
-        case 0...300, 772...799, 900...903, 905...1000:
-            weatherData.condition = "with thunderstorms"
-        case 301...500:
-            weatherData.condition = "with light rain"
-        case 501...600:
-            weatherData.condition = "with showers"
-        case 601...700, 903:
-            weatherData.condition = "and snowing"
-        case 701...771:
-            weatherData.condition = "with fog"
-        case 800, 904:
-            weatherData.condition = "and sunny"
-        case 801...804:
-            weatherData.condition = "and cloudy"
-        default :
-            weatherData.condition = "with unknown weather conditions"
-        }
-        print(json)
+    
+//        print(json)
     }
+    
+    
+//    //Background Functions
+//    func registerBackgroundTask() {
+//        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+//            self?.endBackgroundTask()
+//        }
+//        assert(backgroundTask != .invalid)
+//    }
+//
+//    func endBackgroundTask() {
+//        print("Background task ended.")
+//        UIApplication.shared.endBackgroundTask(backgroundTask)
+//        backgroundTask = .invalid
+//    }
+    
     
     #warning("this func is new and not sure it works")
     func scheduleNotification() {
+        print("scheduleNotification called")
         locationManager.startUpdatingLocation()
         
         let locations = [CLLocation]()
@@ -263,23 +262,30 @@ class ActivitiesViewController: UITableViewController, ActivityDetailsViewContro
             case !activity.lowTemp.isEmpty && weatherData.temperature > Int(activity.lowTemp)! && activity.highTemp.isEmpty:
                 if activity.activityWeatherConditions.contains(weatherData.condition) {
                     activity.shouldNotify = true
+                    print(">lowTemp true")
                 } else {
                     activity.shouldNotify = false
+                    print(">lowTemp false")
                 }
             case !activity.highTemp.isEmpty && weatherData.temperature < Int(activity.highTemp)! && activity.lowTemp.isEmpty:
                 if activity.activityWeatherConditions.contains(weatherData.condition) {
                     activity.shouldNotify = true
+                    print("<highTemp true")
                 } else {
                     activity.shouldNotify = false
+                    print("<highTemp false")
                 }
             case !activity.highTemp.isEmpty && !activity.lowTemp.isEmpty && Int(activity.lowTemp)!...Int(activity.highTemp)! ~= weatherData.temperature:
                 if activity.activityWeatherConditions.contains(weatherData.condition) {
                     activity.shouldNotify = true
+                    print("in range true")
                 } else {
                     activity.shouldNotify = false
+                    print("in range false")
                 }
             default:
                activity.shouldNotify = false
+                print("default false")
             }
             saveActivities()
         }

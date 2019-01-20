@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         #warning("scheduleNotification() is new and not sure if it works yet")
         if let vc = window?.rootViewController as? ActivitiesViewController {
             vc.scheduleNotification()
+            completionHandler(.newData)
         }
     }
 

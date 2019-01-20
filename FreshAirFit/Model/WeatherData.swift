@@ -12,6 +12,5 @@ class WeatherData {
     var city = ""
     var date = ""
     var temperature = 0
-    var conditionCode = 0
     var condition = ""
 }
